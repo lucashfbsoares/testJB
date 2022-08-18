@@ -1,19 +1,47 @@
-const { product } = require('../schema/productSchema');
+const { Product } = require('../schema/productSchema');
 
-const insertProduct = async () => {
+const insertProduct = async ({ name, color, value }) => {
+  const product = await Product.create({
+    name,
+    color,
+    value,
+  });
 
+  return product;
 };
 
-const removeProduct = async ({ }) => {
+const removeProduct = async ({ productId }) => {
+  const product = await Product.findByIdAndRemove(productId);
 
+  if (!product) {
+    throw new Error('Product does not exists');
+  }
 };
 
-const updateProduct = async ({ }) => {
+const updateProduct = async ({
+  productId, name, color, value,
+}) => {
+  const product = await Product.findByIdAndUpdate(
+    productId,
+    {
+      name,
+      color,
+      value,
+    },
+    { new: true },
+  );
 
+  if (!product) {
+    throw new Error('Product does not exists');
+  }
+
+  await product.save();
+  return product;
 };
 
-const showProduct = async ({ }) => {
-
+const showProduct = async () => {
+  const products = await Product.find();
+  return products;
 };
 
 module.exports = {
