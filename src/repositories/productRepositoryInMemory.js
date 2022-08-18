@@ -10,32 +10,6 @@ const insertProduct = async (productData) => {
   return product;
 };
 
-const removeProduct = async ({ productId }) => {
-  const product = await Product.findByIdAndRemove(productId);
-
-  if (!product) {
-    throw new Error('Product does not exists');
-  }
-};
-
-const updateProduct = async (productId, productData) => {
-  const product = await Product.findByIdAndUpdate(
-    productId,
-    productData,
-  );
-
-  await product.save();
-  return product;
-};
-
-const showProduct = async () => {
-  const products = await Product.find();
-  return products;
-};
-
 module.exports = {
   insertProduct,
-  removeProduct,
-  updateProduct,
-  showProduct,
 };

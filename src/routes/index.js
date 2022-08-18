@@ -7,9 +7,9 @@ const {
 } = require('../controllers/productController');
 
 // Criar rotas para o CRUD de produto
-router.post('/users', create);
-router.put('/users/:id', ensureValidProductId, update);
-router.delete('/users/:id', ensureValidProductId, remove);
-router.get('/users', show);
+router.post('/product', create);
+router.put('/product/:id', ensureValidProductId, update);
+router.delete('/product/:id', ensureValidProductId, remove);
+router.get('/product', show);
 
 module.exports = router;
